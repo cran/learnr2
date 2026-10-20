@@ -1,0 +1,445 @@
+---
+title: "Hello learnr2"
+subtitle: "A guided tour of learnr2 features"
+format: live-html
+engine: knitr
+toc: true
+webr:
+  packages:
+    - ggplot2
+---
+
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
+
+{{< include _extensions/r-wasm/live/_gradethis.qmd >}}
+
+## What is this?
+
+**learnr2** lets you write interactive R tutorials that run entirely in the
+reader's web browser using [Quarto](https://quarto.org) and
+[WebR](https://docs.r-wasm.org/webr/). There is no Shiny app and no R server:
+the code cells below execute right here on this page.
+
+This tutorial is itself a **learnr2** tutorial. Read it, edit the cells, and run
+them to see each feature work.
+
+## 1. Runnable code cells
+
+Every code cell is a live editor. Press **Run Code** (or `Ctrl`/`Cmd` +
+`Enter`) to execute it. Edit the code and run it again --- it is yours to experiment with.
+
+```{webr}
+#| label: runnable-code-cells-1
+x <- c(4, 8, 15, 16, 23, 42)
+mean(x)
+```
+
+Output works the same as in R, including plots:
+
+```{webr}
+#| label: runnable-code-cells-2
+library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", formula = y ~ x)
+```
+
+## 2. Non-editable cells
+
+Sometimes you want to *show* code that runs but should not be edited. Use the
+`edit: false` option.
+
+```{webr}
+#| label: non-editable-cells-1
+#| edit: false
+sample(1:100, 5)
+```
+
+## 3. Exercises
+
+An **exercise** is a code cell the reader is expected to complete. Mark a cell
+with the `exercise` option and give it a label. The cell starts empty (or
+with a leading comment, as below) for the reader to fill in.
+
+```{webr}
+#| label: exercises-1
+#| exercise: ex_sum
+#| persist: true
+# Compute the sum of the integers from 1 to 100.
+```
+
+Add `persist: true` (as shown above) to save the reader's edits in the
+browser's `localStorage`, keyed to this page and exercise. Refresh the page
+after editing the cell above --- your changes are still there.
+
+### Hints
+
+Add a `.hint` block tied to the exercise label. Readers can reveal it when
+stuck.
+
+::: { .hint exercise="ex_sum" }
+The `sum()` function adds numbers, and `1:100` is the sequence 1, 2, ..., 100.
+:::
+
+### Solutions
+
+A `.solution` block reveals a model answer.
+
+::: { .solution exercise="ex_sum" }
+```r
+sum(1:100)
+```
+:::
+
+## 4. Setup cells
+
+Exercises often need objects to exist before the reader starts. A cell marked
+`setup: true` for a given exercise label runs invisibly beforehand. Here we
+pre-create a vector the next exercise uses.
+
+```{webr}
+#| label: setup-cells-1
+#| setup: true
+#| exercise: ex_mean
+scores <- c(72, 88, 91, 64, 100)
+```
+
+```{webr}
+#| label: setup-cells-2
+#| exercise: ex_mean
+#| persist: true
+# `scores` already exists. Compute its mean.
+```
+
+::: { .solution exercise="ex_mean" }
+```r
+mean(scores)
+```
+:::
+
+## 5. Automatic grading
+
+**learnr2** reuses 'quarto-live''s grading, which is powered by the
+[**gradethis**](https://pkgs.rstudio.com/gradethis/) package. Add a `check` cell
+for an exercise; it runs when the reader presses **Submit** and compares their
+work against the solution.
+
+A graded exercise needs its solution as a `solution: true` **code cell**
+(not the `.solution` fenced div used in section 3) --- only the cell form
+emits the machine-readable copy of the code that `gradethis::grade_this_code()`
+compares against. The cell still renders a "Show solution" button for the
+reader, exactly like the div does.
+
+```{webr}
+#| label: automatic-grading-1
+#| exercise: ex_grade
+#| persist: true
+# Multiply 6 by 7.
+```
+
+```{webr}
+#| label: automatic-grading-2
+#| exercise: ex_grade
+#| solution: true
+6 * 7
+```
+
+```{webr}
+#| label: automatic-grading-3
+#| exercise: ex_grade
+#| check: true
+gradethis::grade_this_code()
+```
+
+Try submitting a wrong answer (e.g. `6 + 7`), then the right one, to see the
+feedback change.
+
+## 6. Quiz questions
+
+Not every check needs to run code. `learnr2::question()` adds a learnr-style
+quiz question --- graded entirely in the reader's browser with plain
+JavaScript, no Shiny or R server involved. Questions render wherever the
+R code below is evaluated (a normal `{r}` chunk, since this runs once while
+you *author* the tutorial, not each time a reader loads the page).
+
+Single choice, with a nudge to try again:
+
+```{r}
+#| label: quiz-questions-1
+learnr2::question(
+  "Which function computes the arithmetic mean in base R?",
+  learnr2::answer("mean()", correct = TRUE),
+  learnr2::answer("average()"),
+  learnr2::answer("avg()"),
+  allow_retry = TRUE
+)
+```
+
+Multiple choice is inferred automatically from how many answers are marked
+`correct`:
+
+```{r}
+#| label: quiz-questions-2
+learnr2::question(
+  "Which of these are valid ways to create a vector in R?",
+  learnr2::answer("c(1, 2, 3)", correct = TRUE),
+  learnr2::answer("1:3", correct = TRUE),
+  learnr2::answer("vector(1, 2, 3)"),
+  random_answer_order = TRUE
+)
+```
+
+Free-text questions compare the reader's typed answer against one or more
+acceptable responses:
+
+```{r}
+#| label: quiz-questions-3
+learnr2::question(
+  "What R package powers grading for learnr2 exercises?",
+  learnr2::answer("gradethis", correct = TRUE),
+  type = "text",
+  allow_retry = TRUE
+)
+```
+
+Some free-response questions have a definite right answer that's too long or
+variable in phrasing to grade with an exact match. `type = "reflection"`
+handles that case: it shows the reader a model answer after they submit
+their own response, without grading it --- and locks their response so it
+can't be changed afterward:
+
+```{r}
+#| label: quiz-questions-4
+learnr2::question(
+  "Explain why the code cells on this page don't need a running R server.",
+  learnr2::answer(
+    "They execute in the reader's own browser via WebR (R compiled to
+    WebAssembly), not on a remote server --- so the tutorial keeps working
+    even after wherever it was originally hosted goes offline.",
+    correct = TRUE
+  ),
+  type = "reflection"
+)
+```
+
+`type = "reflection_editable"` works the same way, except the reader can
+keep revising their own response after the model answer is revealed:
+
+```{r}
+#| label: quiz-questions-5
+learnr2::question(
+  "Explain the difference between `type = \"text\"` and `type =
+  \"reflection\"`.",
+  learnr2::answer(
+    "`\"text\"` grades an exact match against one or more accepted answers;
+    `\"reflection\"` never grades anything, it just shows a model answer for
+    comparison.",
+    correct = TRUE
+  ),
+  type = "reflection_editable"
+)
+```
+
+Submitted answers are saved automatically (again via `localStorage`, keyed
+by page URL and question) and restored on the reader's next visit. The
+default key is the question's `{r}` chunk label, so rewording a question
+is safe --- but renaming its chunk resets that question's saved answers.
+Pass `id = "some-stable-slug"` to `question()` to pin the key regardless
+of the chunk label.
+
+Group related questions with `learnr2::quiz()`:
+
+```{r}
+#| label: quiz-questions-6
+learnr2::quiz(
+  caption = "Quick check",
+  learnr2::question(
+    "2 + 2 equals?",
+    learnr2::answer("4", correct = TRUE),
+    learnr2::answer("22")
+  ),
+  learnr2::question(
+    "Is R free and open source?",
+    learnr2::answer("Yes", correct = TRUE),
+    learnr2::answer("No")
+  )
+)
+```
+
+## 7. Copy/paste an image
+
+For exercises where the reader's work is a plot or other image, add
+`allow_image = TRUE` to a `"reflection"`/`"reflection_editable"` question
+and let them paste a screenshot from their clipboard *as* their response
+--- there is no file-upload button, just press Ctrl+V (or Cmd+V) with the
+response box focused (or click the box below it and paste there instead).
+Once an image is pasted it is the whole answer: the text box disappears
+and nothing typed is saved alongside it. "Remove image" brings the text
+box back.
+
+Try it: edit the exercise below (or leave it as-is), run it, then take a
+screenshot of the plot it produces --- e.g. `Cmd+Shift+4` on a Mac,
+`Win+Shift+S` on Windows, or your Chromebook's screenshot tool (`Ctrl` +
+`Show windows`) --- and paste it into the question underneath.
+
+```{webr}
+#| label: copy-paste-an-image-1
+#| exercise: ex_image_plot
+#| persist: true
+ggplot(mtcars, aes(wt, mpg)) +
+  geom_point(color = "steelblue", size = 3)
+```
+
+```{r}
+#| label: copy-paste-an-image-2
+learnr2::question(
+  "Paste a screenshot of the plot you made in the exercise above.",
+  learnr2::answer(
+    "A scatterplot of `wt` vs. `mpg`, colored steel blue.",
+    correct = TRUE
+  ),
+  type = "reflection",
+  allow_image = TRUE
+)
+```
+
+Whatever your OS's native clipboard format actually is behind the scenes
+(bitmap, TIFF, etc. --- it genuinely varies by platform, so a screenshot
+isn't guaranteed to already be a PNG), `allow_image` accepts it directly
+--- PNG, JPEG, GIF, WebP, or BMP --- and re-encodes it as PNG itself before
+storing it, so what's actually saved is always PNG no matter which of
+those your platform handed over (see the `question()` help page for the
+exact size limit).
+
+## 8. Student info and submission
+
+Two more pieces for wrapping a tutorial into something a student can turn
+in, no server required. In a real tutorial, `student_info()` normally goes
+at the very top and `download_answers_button()` at the very bottom; they're
+shown together here just for the demo.
+
+`student_info()` collects identifying information (name, email, an
+optional ID by default). It's deliberately *not* a quiz question --- there
+is nothing to grade and no model answer, just a plain form with its own
+Submit button. It also auto-saves as the reader types, so nothing is lost
+even if they never click Submit:
+
+```{r}
+#| label: student-info-and-submission-1
+learnr2::student_info()
+```
+
+`download_answers_button()` gathers every `question()` and `student_info()`
+answer already saved on the page into one readable JSON file and downloads
+it --- so a reader can save their work and turn it in (attach to an email,
+upload to an LMS), all without a server to submit to. The download also
+carries browser info, a per-device id, and a `time` field: the moment the
+reader clicked "Download", lightly obfuscated so the raw timestamp isn't
+readable or hand-editable in the file. Recover it with
+`learnr2::submission_time(path)`. Nothing else is hashed or signed --- with
+no server involved there is no way to *prevent* a reader editing their
+answers; this just keeps the submission time honest at a glance:
+
+```{r}
+#| label: student-info-and-submission-2
+learnr2::download_answers_button(filename_prefix = "hello-learnr2")
+```
+
+## 9. Layout options
+
+Nothing in this section is a widget. It describes the page-level choices an
+author has, all made in the YAML header or with one function call, and what
+each one does for the reader.
+
+### Table of contents
+
+Every tutorial scaffolded by `create_tutorial()` has `toc: true` in its
+YAML header, which gives the page Quarto's table-of-contents sidebar: the
+list of sections on the right of this page. Set `toc: false` to drop it.
+
+The sidebar is a map, not a shortcut. Sections reveal one at a time behind
+**Continue** buttons whether or not there is a TOC; the TOC adds a view of
+the whole tutorial's shape and of how far the reader has come. On a
+phone-width screen Quarto hides the sidebar on its own, so a `toc: true`
+tutorial behaves like a `toc: false` one there, with no author action.
+
+### Submitting before continuing
+
+By default, the **Continue** button at the end of a section stays greyed
+out, with a note under it, until every question and student-info form
+above it has been submitted. A reader can type anything, but must submit
+*something* before moving on, and a `type = "reflection"` question locks
+once submitted. Together those two rules let a tutorial show its own
+answer immediately after the reader's, which is what we always want,
+without inviting anyone to paste our answer back into their box: by the
+time they see ours, theirs is in and cannot be changed.
+
+This tour is reference material, so it switches the gate off with the
+chunk below (shown here; hidden in a real tutorial with `echo: false`).
+That is why you have been able to click past every question on this page
+without answering it. Leave this chunk out of a tutorial of your own and
+the gate is on.
+
+```{r}
+#| label: layout-options-1
+learnr2::tutorial_options(require_submission = FALSE)
+```
+
+### Skipping ahead
+
+By default the TOC cannot be used to read ahead. Look at the sidebar now:
+the entries below this section are dimmed, a click on one does nothing, and
+each lights up only when its section is unlocked. A reader can see what is
+coming and where they are, but cannot open the whole tutorial at once.
+
+If you want readers to roam freely --- reference material, or a tour like
+this one --- turn on skipping too, in that same `tutorial_options()` call:
+
+```r
+learnr2::tutorial_options(allow_skip = TRUE, require_submission = FALSE)
+```
+
+Then clicking any TOC entry unlocks every section up to that one and jumps
+there, like a classic **learnr** tutorial with `allow_skip: yes`. This page
+leaves skipping at its default so you can see the dimming in action.
+Without a TOC the setting has no effect, since there is nothing to click.
+
+### Pauses without a heading
+
+Not every Continue stop needs a title. A line holding only `###`, with
+nothing after it, is a *pause*: the content below it stays hidden until
+the reader clicks a button that says just **Continue**, and no heading is
+shown. The **tutorial.helpers** house style puts two of these inside every
+exercise, one before the author's own answer and one before the knowledge
+drop, so the reader compares before they read on. Here is one now.
+
+###
+
+You just clicked through a pause. In the `.qmd` it is three hash marks on
+a line by themselves; in the sidebar it has no entry.
+
+### Start Over
+
+Every answer, pasted image, and exercise edit on a page is saved in the
+reader's browser, so reloading never loses anything. The way to wipe it all
+is the **Start Over** button, which **learnr2** adds to every tutorial
+automatically --- nothing to write in the `.qmd`. It asks for
+confirmation, then clears this page's saved state (but not the per-device
+id that `download_answers_button()` records) and reloads.
+
+Where it appears follows the layout. With a visible sidebar it sits at the
+bottom of the table of contents, as it does on this page. Without one ---
+`toc: false`, or a screen too narrow for the sidebar --- it moves to the
+top of the tutorial, directly under the title, where it stays visible no
+matter how far the reader has progressed. Either way the reader always has
+exactly one.
+
+## Where to go next
+
+- Use `learnr2::create_tutorial("my-tutorial", dir = ".")` to scaffold
+  your own.
+- Edit the `.qmd`, then run `learnr2::check_tutorial()` on its directory
+  to catch the common authoring mistakes, and
+  `learnr2::render_tutorials()` (or plain Quarto) to build it.
+- Preview the result with `learnr2::run_tutorial()`, which renders, serves
+  and opens it in your browser.

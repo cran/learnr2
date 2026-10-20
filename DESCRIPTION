@@ -1,0 +1,39 @@
+Package: learnr2
+Title: Interactive Tutorials with 'Quarto' and 'WebR'
+Version: 0.1.3
+Authors@R: c(
+    person("David", "Kane", , "dave.kane@gmail.com", role = c("aut", "cre", "cph"),
+           comment = c(ORCID = "0000-0002-6660-3934")),
+    person("Minh", "Vu", , "minhvu0514@gmail.com", role = "aut")
+  )
+Description: Create interactive R tutorials that run entirely in the
+    browser using 'Quarto' <https://quarto.org> and 'WebR'
+    <https://docs.r-wasm.org/webr/latest/> via the 'quarto-live' extension.
+    Provides 'learnr'-style authoring conveniences -- scaffolding, exercises,
+    hints, solutions, and quizzes -- without 'Shiny', 'R Markdown', or a
+    server.
+License: MIT + file LICENSE
+Copyright: See file inst/COPYRIGHTS for the bundled third-party
+        components.
+Encoding: UTF-8
+Depends: R (>= 4.0.0)
+Imports: fs, htmltools, httpuv, jsonlite, knitr, quarto, rmarkdown
+Suggests: learnr, pkgdown, pkgload, rstudioapi, testthat (>= 3.2.0),
+        withr
+VignetteBuilder: quarto
+Config/testthat/edition: 3
+Config/Needs/website: rsconnect
+SystemRequirements: Quarto command line tool
+        (https://github.com/quarto-dev/quarto-cli).
+URL: https://github.com/PPBDS/learnr2, https://ppbds.github.io/learnr2/
+BugReports: https://github.com/PPBDS/learnr2/issues
+Config/roxygen2/version: 8.1.0
+RoxygenNote: 7.3.3
+NeedsCompilation: no
+Packaged: 2026-10-08 17:41:28 UTC; dkane
+Author: David Kane [aut, cre, cph] (ORCID:
+    <https://orcid.org/0000-0002-6660-3934>),
+  Minh Vu [aut]
+Maintainer: David Kane <dave.kane@gmail.com>
+Repository: CRAN
+Date/Publication: 2026-10-20 17:50:07 UTC

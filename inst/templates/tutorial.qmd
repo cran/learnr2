@@ -1,0 +1,84 @@
+---
+title: "{{title}}"
+format: live-html
+engine: knitr
+toc: true
+webr:
+  packages:
+    - dplyr
+---
+
+{{< include _extensions/r-wasm/live/_knitr.qmd >}}
+
+## Student Information
+
+```{r}
+#| label: student-information-1
+#| echo: false
+learnr2::student_info()
+```
+
+## Welcome
+
+Write your tutorial here. The chunks below run entirely in the reader's
+browser using WebR --- no R server required.
+
+## A runnable cell
+
+```{webr}
+#| label: a-runnable-cell-1
+x <- c(1, 2, 3, 4, 5)
+mean(x)
+```
+
+## An exercise
+
+```{webr}
+#| label: an-exercise-1
+#| exercise: first_exercise
+#| persist: true
+# Compute the sum of 1 through 10.
+```
+
+::: { .hint exercise="first_exercise" }
+The `sum()` function adds its arguments. Try `sum(1:10)`.
+:::
+
+::: { .solution exercise="first_exercise" }
+```r
+sum(1:10)
+```
+:::
+
+## A quiz question
+
+```{r}
+#| label: a-quiz-question-1
+#| echo: false
+learnr2::question(
+  "What does `sum(1:10)` return?",
+  learnr2::answer("55", correct = TRUE),
+  learnr2::answer("50"),
+  learnr2::answer("100"),
+  allow_retry = TRUE
+)
+```
+
+## Your Answers
+
+```{r}
+#| label: your-answers-1
+#| echo: false
+learnr2::question(
+  "How many minutes, approximately, did it take you to complete this
+  tutorial? For example, an hour and a half would be 90 minutes.",
+  type = "reflection_editable",
+  validate = "integer"
+)
+```
+
+```{r}
+#| label: your-answers-2
+#| echo: false
+learnr2::download_answers_button(filename_prefix = "{{name}}")
+```

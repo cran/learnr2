@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="David Kane">
+
+<title>Translating learnr Tutorials</title>
+<style>
+
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">Translating learnr Tutorials</h1>
+<p class="author">David Kane</p>
+
+</header>
+
+
+<p>This vignette is the mechanics reference for <strong>learnr2</strong> tutorials. It covers how a classic <a href="https://rstudio.github.io/learnr/"><strong>learnr</strong></a> or <a href="https://ppbds.github.io/tutorial.helpers/"><strong>tutorial.helpers</strong></a> tutorial turns into a <strong>learnr2</strong> one, and the rules every <strong>learnr2</strong> tutorial follows whether it was translated or written fresh. It assumes you have read <a href="ai.html">Tutorials in the Age of AI</a>, which covers what a tutorial is <em>for</em> and how it should teach. This one covers how the file is put together so that it renders and runs.</p>
+<p>The single most important difference is that a <strong>learnr2</strong> tutorial needs nothing installed to view. There is no Shiny app and no R server. A tutorial renders once to a static HTML page, and its code cells run in the reader’s browser via WebR. Most of the rules below follow from that.</p>
+<h2 id="where-things-go">Where things go</h2>
+<p>Classic tutorials live at <code>inst/tutorials/&lt;name&gt;/tutorial.Rmd</code> in their package. Translate one into <code>inst/tutorials/&lt;name&gt;/&lt;name&gt;.qmd</code>, either in <strong>learnr2</strong> itself for a bundled tutorial or in a separate content package that depends on <strong>learnr2</strong>. <code>create_tutorial()</code> also writes <code>&lt;name&gt;.qmd</code>. A file named <code>tutorial.qmd</code> works too, because <code>available_tutorials()</code> and <code>run_tutorial()</code> take the first <code>.qmd</code> in the directory, but prefer <code>&lt;name&gt;.qmd</code>.</p>
+<p>Keep the source’s <code>images/</code> and <code>data/</code> directories next to the <code>.qmd</code>, exactly as they were. Relative paths resolve against the <code>.qmd</code>’s own directory.</p>
+<h2 id="quick-reference">Quick reference</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>learnr or tutorial.helpers source</th>
+<th>learnr2 equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>output: learnr::tutorial</code>, <code>runtime: shiny_prerendered</code></td>
+<td><code>format: live-html</code> and <code>engine: knitr</code></td>
+</tr>
+<tr class="even">
+<td><code>library(learnr)</code> or <code>library(tutorial.helpers)</code> in a setup chunk</td>
+<td>delete it, and call functions as <code>learnr2::fn()</code></td>
+</tr>
+<tr class="odd">
+<td><code>knitr::opts_chunk$set(echo = FALSE)</code> in setup</td>
+<td><code>#| echo: false</code> on every widget chunk, never a document-wide setting</td>
+</tr>
+<tr class="even">
+<td>the <code>info_section.Rmd</code> child document</td>
+<td>a chunk calling <code>learnr2::student_info()</code></td>
+</tr>
+<tr class="odd">
+<td>the <code>download_answers.Rmd</code> child document</td>
+<td>a minutes <code>question()</code> chunk and a <code>learnr2::download_answers_button()</code> chunk</td>
+</tr>
+<tr class="even">
+<td>an <code>exercise = TRUE</code> chunk</td>
+<td>a <code>{webr}</code> cell with <code>label</code>, <code>exercise</code> and <code>persist: true</code></td>
+</tr>
+<tr class="odd">
+<td>an <code>ex1-setup</code> chunk</td>
+<td>a <code>{webr}</code> cell with <code>setup: true</code> and the same <code>exercise</code>, or the setup inlined</td>
+</tr>
+<tr class="even">
+<td><code>ex1-hint</code>, <code>ex1-hint-1</code>, … chunks</td>
+<td><code>.hint</code> fenced divs</td>
+</tr>
+<tr class="odd">
+<td>an <code>ex1-solution</code> chunk, ungraded</td>
+<td>a <code>.solution</code> fenced div</td>
+</tr>
+<tr class="even">
+<td>an <code>ex1-solution</code> chunk, graded</td>
+<td>a <code>{webr}</code> cell with <code>solution: true</code></td>
+</tr>
+<tr class="odd">
+<td>an <code>ex1-check</code> chunk with <strong>gradethis</strong></td>
+<td>a <code>{webr}</code> cell with <code>check: true</code>, plus the <code>_gradethis.qmd</code> include</td>
+</tr>
+<tr class="even">
+<td><code>question(&quot;...&quot;, answer(&quot;a&quot;, correct = TRUE))</code></td>
+<td><code>learnr2::question(&quot;...&quot;, learnr2::answer(&quot;a&quot;, correct = TRUE))</code></td>
+</tr>
+<tr class="odd">
+<td><code>question_text(...)</code>, with or without a model answer</td>
+<td><code>learnr2::question(..., type = &quot;reflection&quot;)</code></td>
+</tr>
+<tr class="even">
+<td><code>question_numeric(...)</code> (the minutes question)</td>
+<td><code>learnr2::question(..., type = &quot;reflection_editable&quot;, validate = &quot;integer&quot;)</code></td>
+</tr>
+<tr class="odd">
+<td>a bare <code>###</code> divider</td>
+<td>keep it, since it becomes a Continue stop with no heading</td>
+</tr>
+<tr class="even">
+<td><code>allow_skip: yes</code> in the YAML</td>
+<td><code>learnr2::tutorial_options(allow_skip = TRUE)</code></td>
+</tr>
+<tr class="odd">
+<td><code>knitr::include_graphics(&quot;images/x.png&quot;)</code></td>
+<td><code>![](images/x.png)</code></td>
+</tr>
+<tr class="even">
+<td>prose sending the reader to RStudio or a local console to configure it</td>
+<td>rewrite around the page, or drop it (see below)</td>
+</tr>
+</tbody>
+</table>
+<p>The sections that follow expand on the rows that aren’t obvious.</p>
+<h2 id="the-yaml-header">The YAML header</h2>
+<p>Replace the <strong>learnr</strong> header:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> Some Title</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">  learnr:</span><span class="fu">:tutorial</span><span class="kw">:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">progressive</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">allow_skip</span><span class="kw">:</span><span class="at"> </span><span class="ch">yes</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">runtime</span><span class="kw">:</span><span class="at"> shiny_prerendered</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Some Title&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;A short description, if the source had one&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> live-html</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">engine</span><span class="kw">:</span><span class="at"> knitr</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>Drop <code>tutorial: id:</code>, <code>output:</code>, <code>runtime:</code>, <code>progressive:</code> and <code>allow_skip:</code> entirely. <strong>learnr2</strong> reveals sections progressively on its own. If the source had <code>allow_skip: yes</code> and you want to keep that behaviour, see <em>Sections and the Continue button</em> below. Update <code>title:</code> and <code>subtitle:</code> so neither still describes content you have changed, such as “Tutorials in RStudio” for a tutorial that no longer needs RStudio.</p>
+<p>Immediately after the header, include the quarto-live runtime:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>{{&lt; include _extensions/r-wasm/live/_knitr.qmd &gt;}}</span></code></pre></div>
+<p>Add <code>{{&lt; include _extensions/r-wasm/live/_gradethis.qmd &gt;}}</code> as well if any exercise is graded.</p>
+<h2 id="setup-chunks-and-boilerplate">Setup chunks and boilerplate</h2>
+<p>Delete the <strong>learnr</strong> setup chunk, with its <code>library()</code> calls and <code>knitr::opts_chunk$set()</code>. <strong>learnr2</strong> functions are called with the <code>learnr2::</code> prefix instead.</p>
+<p>The two <strong>tutorial.helpers</strong> child documents become plain chunks. At the top, right after any introductory prose:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>#| label: student-information-1</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>learnr2::student_info()</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>At the bottom:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>#| label: your-answers-1</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>learnr2::question(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  &quot;How many minutes, approximately, did it take you to complete this</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  tutorial? For example, an hour and a half would be 90 minutes.&quot;,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  type = &quot;reflection_editable&quot;,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  validate = &quot;integer&quot;</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>```{r}</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>#| label: your-answers-2</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>#| echo: false</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>learnr2::download_answers_button(filename_prefix = &quot;&lt;name&gt;&quot;)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p><strong>learnr2</strong> has no numeric question type. <code>validate = &quot;integer&quot;</code> blocks Submit until the response is a whole number, without grading it against any one value, since any honest count is acceptable. There is no <code>answer()</code> because there is no correct number of minutes. This is the one question that stays <code>reflection_editable</code>, because there is no right answer to copy. After Submit it locks behind an Edit button, and Edit reopens it until the next Submit, the same cycle as <code>student_info()</code>.</p>
+<h2 id="chunk-labels">Chunk labels</h2>
+<p>Every chunk needs a unique <code>#| label:</code> on its own line inside the chunk, never the old inline <code>{r some-label}</code> form. That applies to <code>{r}</code> chunks and to every <code>{webr}</code> cell, including plain demonstration cells.</p>
+<p>For a question, the label is load-bearing. With no explicit <code>id =</code>, a question’s id is its chunk’s label, and that id is the key its saved answer is stored under and the name it appears under in the downloaded file. Renaming a question’s chunk resets that question for every student.</p>
+<p>Follow the <strong>tutorial.helpers</strong> convention. Take the enclosing <code>##</code> heading, lowercase it, collapse spaces and punctuation to single dashes, drop any leading number such as the <code>6.</code> in <code>## 6. Quiz questions</code>, and append a dash and a sequence number that restarts at 1 in each section. <code>## Quiz questions</code> gives <code>quiz-questions-1</code>, <code>quiz-questions-2</code>, and so on. Count every labelled chunk in the section in document order, <code>{r}</code> and <code>{webr}</code> alike. One variant: the “our answer” chunk that follows an exercise’s question takes the question’s label plus <code>-answer</code>, as in <code>introduction-3</code> and <code>introduction-3-answer</code>, so exercise numbers and label numbers stay in step.</p>
+<h2 id="hide-the-source-of-widget-chunks">Hide the source of widget chunks</h2>
+<p>The <strong>learnr</strong> setup chunk you deleted almost always set <code>echo = FALSE</code> for the whole document. Without it, every <code>{r}</code> chunk shows its own source above its output, so the reader sees the R call that builds each question instead of just the question.</p>
+<p>Add <code>#| echo: false</code> to each chunk that renders a widget: <code>student_info()</code>, <code>question()</code>, <code>quiz()</code>, <code>download_answers_button()</code> and <code>tutorial_options()</code>. Don’t use a document-wide <code>execute: echo: false</code> in the YAML instead. <code>{webr}</code> cells are a pass-through engine that re-emits its own source as output by design, and a global override isn’t verified safe for them.</p>
+<h2 id="exercise-cells">Exercise cells</h2>
+<p>A <strong>learnr</strong> exercise chunk:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>```{r exercise-1, exercise = TRUE}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>becomes a <code>{webr}</code> cell with three options:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>```{webr}</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>#| label: functions-and-packages-2</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>#| exercise: ex_load_tidyverse</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>#| persist: true</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>______</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>glimpse(mtcars)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<ul>
+<li><code>label</code> follows the convention above.</li>
+<li><code>exercise</code> is any stable id. The bundled tutorial uses snake case, like <code>ex_total</code>, to keep it visibly distinct from the dashed label.</li>
+<li><code>persist: true</code> saves the reader’s typed code in their browser so it survives a reload and appears in the downloaded answers. Without it, their code is saved nowhere.</li>
+</ul>
+<p>Keep whatever starter code the source had, whether empty, a leading comment, or <strong>tutorial.helpers</strong>’ <code>____</code> blanks. Drop chunk options that mean nothing in the browser: <code>exercise.lines</code>, <code>exercise.timelimit</code>, <code>exercise.cap</code>, <code>exercise.df_print</code>, <code>exercise.blanks</code>, <code>message</code> and <code>warning</code>.</p>
+<h3 id="exercise-setup">Exercise setup</h3>
+<p>A <strong>learnr</strong> <code>ex1-setup</code> chunk has two translations. Either use a <code>{webr}</code> cell with <code>setup: true</code> and the same <code>exercise</code> id, which runs invisibly before the reader’s code:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>```{webr}</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>#| label: analysis-3</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>#| setup: true</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>#| exercise: ex_summarise</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>library(dplyr)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>flights &lt;- nycflights13::flights</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>or put the setup lines at the top of the exercise cell itself, which is simplest for a line or two and keeps the cell self-contained.</p>
+<p>Whichever you choose, remember that <code>{webr}</code> cells do not share state. Each exercise runs in its own environment, separate from every other exercise and from any earlier demonstration cell, and a reload wipes all of it. Anything an exercise needs must come from its own setup cell or its own body.</p>
+<h3 id="hints-and-solutions">Hints and solutions</h3>
+<p>A hint chunk becomes a fenced div tied to the exercise id:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>::: { .hint exercise=&quot;ex_load_tidyverse&quot; }</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>Some hint text, or an inline code sample.</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
+<p>Numbered hints (<code>ex1-hint-1</code>, <code>ex1-hint-2</code>, …) become several consecutive <code>.hint</code> divs with the same <code>exercise</code>, which quarto-live reveals one at a time. A model answer becomes a <code>.solution</code> div, and its inner <code>```r</code> block is required:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>::: { .solution exercise=&quot;ex_load_tidyverse&quot; }</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>```r</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>glimpse(mtcars)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>```</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
+<p><strong>A graded exercise is the exception.</strong> If the exercise also has a <code>check: true</code> cell, its solution must be a <code>{webr}</code> cell with <code>solution: true</code>, not a <code>.solution</code> div:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode default"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>```{webr}</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>#| label: analysis-4</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>#| exercise: ex_load_tidyverse</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>#| solution: true</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>library(tidyverse)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>glimpse(mtcars)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>```</span></code></pre></div>
+<p>Only the cell form produces the hidden copy of the code that the grader compares against. With the div, submission fails with “No solution code was found.” The cell still shows the reader a “Show solution” button.</p>
+<h3 id="grading">Grading</h3>
+<p>Translate a <code>check</code> chunk that uses <strong>gradethis</strong>, such as <code>gradethis::grade_this_code()</code>, into a <code>{webr}</code> cell with <code>check: true</code> and the exercise’s id. Add the <code>_gradethis.qmd</code> include after <code>_knitr.qmd</code>, and give the exercise a <code>solution: true</code> cell as just described. If the source check is trivial or absent, leave it out. An exercise doesn’t need grading to be useful.</p>
+<h2 id="questions">Questions</h2>
+<p><strong>learnr</strong> questions become <code>learnr2::question()</code> calls in a <code>{r}</code> chunk, with <code>learnr2::answer()</code> for each answer and <code>learnr2::quiz()</code> to group them. The chunk runs once, when the tutorial is rendered, not once per reader. These arguments carry over unchanged: <code>allow_retry</code>, <code>random_answer_order</code> for choice questions, <code>correct</code> and <code>incorrect</code>.</p>
+<ul>
+<li><strong>A choice question</strong>, built from <code>answer(..., correct = TRUE)</code> options, keeps the default <code>type = &quot;auto&quot;</code>. It becomes single or multiple choice by how many answers are correct. Use <code>type = &quot;text&quot;</code> for a typed exact-match answer.</li>
+<li><strong><code>question_text()</code></strong>, the <strong>tutorial.helpers</strong> workhorse for both “explain in your own words” and CP/CR evidence questions, becomes <code>type = &quot;reflection&quot;</code>. Its correct answer’s text, if it has one, is revealed as a model answer after the reader submits. It is never graded against their wording. Drop the options with no equivalent: <code>try_again_button</code>, <code>rows</code>, <code>options</code>, <code>trim</code> and <code>placeholder</code>.</li>
+<li><strong><code>question_numeric()</code></strong> becomes <code>type = &quot;reflection_editable&quot;</code> with <code>validate = &quot;integer&quot;</code> and no <code>answer()</code>, as in the minutes question.</li>
+<li><strong>Custom <code>answer_fn</code> checkers</strong>, regular expressions and partial credit have no equivalent. Reduce them to plain <code>answer()</code> matches, or to a <code>&quot;reflection&quot;</code> question if the point was open-ended.</li>
+</ul>
+<p>Use <code>&quot;reflection&quot;</code>, not <code>&quot;reflection_editable&quot;</code>, for the old <code>allow_retry = TRUE, try_again_button = &quot;Edit Answer&quot;</code> idiom. <strong>learnr2</strong> locks every submitted answer by default, and <a href="ai.html">Tutorials in the Age of AI</a> explains why: we show our answer right after the reader’s, and an editable box next to it invites copying.</p>
+<p>A <code>question()</code> always carries its prompt in <code>text</code>. That string is shown in the question box, saved with the answer, and printed beside it in the downloaded file. Where <strong>tutorial.helpers</strong> put the prompt in prose above a <code>question_text(NULL, ...)</code> chunk, move the question into <code>text</code> and keep any longer set-up prose above the chunk.</p>
+<p>Choice and <code>&quot;text&quot;</code> questions, and <code>quiz()</code>, suit mechanics tutorials and feature tours. A normal data-science tutorial teaches concepts through exercises and knowledge drops rather than quizzes, so expect most translated questions to be <code>&quot;reflection&quot;</code>.</p>
+<h3 id="screenshot-questions">Screenshot questions</h3>
+<p><code>learnr2::question(type = &quot;reflection&quot;, allow_image = TRUE)</code> lets the reader paste a screenshot as their answer. Use it in four cases, and convert the source’s question whenever one applies:</p>
+<ol type="1">
+<li><strong>The student would copy text out of a web page.</strong> <strong>tutorial.helpers</strong> tutorials often say “copy everything from X through Y on this page” and take a pasted mess of text, as the website tutorials in <strong>vscode.tutorials</strong> do for the student’s own rendered pages. Ask instead for a screenshot of the relevant part of the page. The screenshot shows what the student actually saw, layout included, and is easier to check.</li>
+<li><strong>The student produces an image,</strong> usually a plot. Classic tutorials verify a plot exercise with <code>show_file()</code>, which proves the student has <em>code</em>, not that it drew the right picture. Ask for a screenshot of the plot instead, as in the plotting template in <a href="ai.html">Tutorials in the Age of AI</a>. This is very common in <strong>misc.tutorials</strong>. Keep <code>show_file()</code> for exercises whose result is text, such as a printed tibble or summary statistics.</li>
+<li><strong>Nothing else can verify the step,</strong> such as being signed in to an account or having a particular window open.</li>
+<li><strong>The student carries out several small steps in a row.</strong> Turning each one into its own question is sometimes more than the steps deserve. If every step is necessary, give the steps as plain instructions and end with a single screenshot of something that only looks right if all of them were done correctly. For example, after “create the repo, add a <code>.gitignore</code>, commit and push”, ask for a screenshot of the repo’s page on GitHub showing the <code>.gitignore</code> file. Pick the screen so a skipped or botched step shows: if the screenshot would look the same without one of the steps, that step needs its own check. When translating, use this for a run of steps the source left unchecked. Don’t merge questions the source already asks separately, since that pacing was the author’s choice.</li>
+</ol>
+<p>When you convert a question, rewrite the prose around it to match. An instruction that says “copy” or “CP/CR” should now say what to screenshot. Any sentence explaining that pasted text may look messy goes, since it no longer applies. Keep the source’s own answer, if it had one, as the answer shown after Continue: a screenshot of the expected page, or our answer chunk drawing the expected plot.</p>
+<p>The first screenshot question a student meets should say how to take a screenshot and how to paste it: <code>Cmd + Shift + 4</code> on a Mac, <code>Win + Shift + S</code> on Windows, then click in the answer box and press <code>Ctrl + V</code> (<code>Cmd + V</code> on a Mac). Later ones can just ask for the screenshot.</p>
+<p>Ask for one specific screenshot, never a hedged choice. “Paste a screenshot of your GitHub dashboard” works. “Paste a screenshot showing you’re signed in, for example your profile page or the account menu” leaves the reader guessing which one counts. If it isn’t obvious why that screen proves the step, say so.</p>
+<p>If the prompt reads better as ordinary text on the page, write it there and pass <code>show_text = FALSE</code>. Still repeat the wording in <code>text</code>, which is kept in the saved data and read to screen-reader users.</p>
+<h2 id="images">Images</h2>
+<p>Replace <code>knitr::include_graphics()</code> chunks with plain Markdown, <code>![](images/thing.png)</code>, optionally with <code>{width=90%}</code>. There is no chunk to label or hide.</p>
+<h2 id="sections-and-the-continue-button">Sections and the Continue button</h2>
+<p><strong>learnr2</strong> reveals a tutorial one section at a time. Every <code>##</code> and <code>###</code> heading becomes a stop behind a Continue button, and you add nothing to opt in. A Continue button always sits at the end of something to read, never directly under a heading: clicking it reveals the next heading together with the text that follows it, which may or may not include the next exercise. In particular, a <code>##</code> heading followed immediately by a bare <code>###</code>, the way <strong>tutorial.helpers</strong> opens every topic, shows the heading and that first block together. Some details for translations:</p>
+<ul>
+<li><strong>Keep every bare <code>###</code> divider.</strong> A line holding only <code>###</code> becomes a Continue stop with no visible heading and a button that just says “Continue”. <strong>tutorial.helpers</strong> puts two inside every exercise, one before the author’s answer and one before the knowledge drop, and both pauses survive the translation.</li>
+<li><strong>Delete a titled heading that exists only as a pacing break,</strong> with no content of its own, and fold its prose into the enclosing section.</li>
+<li><strong><code>### Hints</code> and <code>### Solutions</code> subsections</strong> that only wrap a <code>.hint</code> or <code>.solution</code> div are not separate stops. They appear with the exercise they belong to.</li>
+<li><strong>The table of contents can’t be used to read ahead.</strong> Entries for sections the reader hasn’t reached are dimmed and do nothing when clicked. <code>learnr2::tutorial_options(allow_skip = TRUE)</code> restores <strong>learnr</strong>’s <code>allow_skip: yes</code>, where clicking an entry unlocks everything up to it.</li>
+<li><strong>Continue waits for answers.</strong> A section’s Continue button is disabled until every question and <code>student_info()</code> form above it has been submitted. <code>learnr2::tutorial_options(require_submission = FALSE)</code> turns that off, which suits reference material.</li>
+<li><strong><code>toc: false</code> is supported.</strong> Without a sidebar, the Start Over button moves to the top of the tutorial, under the title.</li>
+<li><strong>Links that leave the page open in a new tab,</strong> so following one never makes the tutorial disappear. Write ordinary Markdown links. Nothing is needed to opt in.</li>
+</ul>
+<p>Call <code>tutorial_options()</code> at most once, in its own chunk with <code>#| echo: false</code>.</p>
+<h2 id="packages-and-code-that-runs-at-render-time">Packages, and code that runs at render time</h2>
+<p>The <code>webr:</code> block in the YAML header is the only place WebR learns what to install in the reader’s browser. List every package that any <code>{webr}</code> cell uses, whether exercise, setup, check or demonstration. An exercise that calls <code>library(dplyr)</code> or <code>nycflights13::flights</code> needs both packages listed:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">webr</span><span class="kw">:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">packages</span><span class="kw">:</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> dplyr</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> nycflights13</span></span></code></pre></div>
+<p>A <code>{r}</code> chunk is different. It runs once, when the tutorial is rendered on your machine or in CI, never in the reader’s browser. That gives it two legitimate jobs: rendering a <strong>learnr2</strong> widget, and showing <em>our answer</em>, an <code>#| echo: true</code> chunk that runs real code so the reader can compare it with their own. Every package such a chunk uses must be installed wherever the tutorial is rendered, which for a content package means listing it under Suggests. Such chunks must not reach for the network. Never use a <code>{r}</code> chunk to set up objects for a <code>{webr}</code> cell, since the browser never sees what a <code>{r}</code> chunk did.</p>
+<h2 id="the-page-needs-nothing-installed">The page needs nothing installed</h2>
+<p>A <strong>learnr2</strong> tutorial page needs no local R, no RStudio, and no R package beyond those listed for WebR. A translation can get every mechanical rule right and still break this, by leaving prose that sends the reader to “the R Console” to run something like <code>tutorial.helpers::set_rstudio_settings()</code> or <code>rstudioapi::readRStudioPreference()</code>. A reader who opened the tutorial from a link, with nothing installed, hits a wall there.</p>
+<p>When translating, look for and rewrite or remove anything that assumes:</p>
+<ul>
+<li>A separate, locally running R session the reader switches to, as opposed to a <code>{webr}</code> cell on the page.</li>
+<li>Any R package beyond base R and the <code>webr:</code> list being available on the page.</li>
+<li>RStudio itself, or its menus and settings.</li>
+<li>A manual procedure for restarting the tutorial from scratch. Every <strong>learnr2</strong> page has a Start Over button that clears everything, so point to it instead.</li>
+</ul>
+<p>If the source tutorial’s whole point was configuring a local R installation, it has no <strong>learnr2</strong> translation. Drop it rather than reproduce commands the reader can’t run.</p>
+<p>This is a rule about the <em>page</em>, not about the student. A normal AI-era tutorial has the student work in their own repository and Quarto document, run <code>show_file()</code> in their own R Terminal, and paste the result into a <code>&quot;reflection&quot;</code> question. That is the evidence model in <a href="ai.html">Tutorials in the Age of AI</a>, and the page itself still needs nothing installed. Note that <code>learnr2::show_file()</code> is for that kind of local session. It isn’t available inside a <code>{webr}</code> cell, so changing <code>tutorial.helpers::show_file()</code> to <code>learnr2::show_file()</code> doesn’t fix prose that tells a reader to run it on the page.</p>
+<h2 id="showing-syntax-without-running-it">Showing syntax without running it</h2>
+<p>To show an R chunk literally, as this vignette does, wrap it in a four-backtick block marked <code>{verbatim}</code>.</p>
+<p>Inline code is harder. Writing <code>`r x`</code> in a sentence runs it, and wrapping it in an extra pair of backticks doesn’t help, because Quarto still evaluates it. Spell the backticks as HTML entities inside a <code>&lt;code&gt;</code> tag instead:</p>
+<pre><code>&lt;code&gt;&amp;#96;r x&amp;#96;&lt;/code&gt;</code></pre>
+<p>That renders as the literal syntax, because there is no backtick in the source for Quarto to match.</p>
+<h2 id="check-it-by-rendering-it">Check it by rendering it</h2>
+<p>Syntax that looks right can still be wrong in ways only the rendered page shows, such as R source printed above a question. After translating, run the static checks and a real render:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>learnr2<span class="sc">::</span><span class="fu">check_tutorial</span>(<span class="st">&quot;inst/tutorials/&lt;name&gt;&quot;</span>)    <span class="co"># labels, echo, persist, boilerplate, packages</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>learnr2<span class="sc">::</span><span class="fu">render_tutorials</span>(<span class="st">&quot;inst/tutorials/&lt;name&gt;&quot;</span>)  <span class="co"># a real Quarto render</span></span></code></pre></div>
+<p><code>check_tutorial()</code> catches a missing label, <code>echo: false</code> or <code>persist: true</code>, a graded exercise with a <code>.solution</code> div, a <code>{webr}</code> package missing from the <code>webr:</code> list, and missing boilerplate. Then open the rendered HTML in a browser and click through it.</p>
+<p><code>run_tutorial()</code> reads the <em>installed</em> copy of a package, not your working files. While editing a content package, load it with <code>devtools::load_all()</code> first, and <code>run_tutorial()</code> and <code>available_tutorials()</code> will read its tutorials from the source tree. Don’t commit render artifacts such as <code>_extensions/</code>, <code>*.html</code>, <code>*_files/</code> and <code>.quarto/</code> alongside the <code>.qmd</code>, because <code>run_tutorial()</code> adds the extension and renders on demand.</p>
+<p>A content package should test every tutorial from <code>tests/testthat/test-tutorials.R</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>tutorials <span class="ot">&lt;-</span> learnr2<span class="sc">::</span><span class="fu">available_tutorials</span>(<span class="at">package =</span> <span class="st">&quot;&lt;your package&gt;&quot;</span>, <span class="at">type =</span> <span class="st">&quot;quarto&quot;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>learnr2<span class="sc">::</span><span class="fu">check_tutorial</span>(tutorials<span class="sc">$</span>path)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>learnr2<span class="sc">::</span><span class="fu">render_tutorials</span>(tutorials<span class="sc">$</span>path)</span></code></pre></div>
+<p>Guard that test with <code>testthat::skip_on_cran()</code> and <code>testthat::skip_if(is.null(quarto::quarto_path()))</code>, since it needs the Quarto command line tool.</p>
+<h2 id="one-learnr2-tutorial-in-a-classic-learnr-package">One learnr2 tutorial in a classic learnr package</h2>
+<p>A single <strong>learnr2</strong> <code>.qmd</code> can live in a package whose other tutorials are classic <strong>learnr</strong> <code>.Rmd</code> files. <strong>learnr2</strong>’s own functions scan every tutorial directory and prefer <code>.qmd</code>, so <code>learnr2::run_tutorial(&quot;&lt;name&gt;&quot;, package = &quot;&lt;host package&gt;&quot;)</code> finds it, renders it and serves it. <code>R CMD check</code> on the host package treats the file as data and ignores it.</p>
+<p>Classic tooling, though, only ever looks for <code>.Rmd</code>:</p>
+<ul>
+<li><code>learnr::available_tutorials()</code> doesn’t list a directory holding only a <code>.qmd</code>, so <code>learnr::run_tutorial()</code> can’t launch it.</li>
+<li><code>tutorial.helpers::return_tutorial_paths()</code> keeps only <code>.Rmd</code> files, so a host package whose tests render tutorials through it neither renders nor fails on the <code>.qmd</code>. It simply goes untested.</li>
+</ul>
+<p>So, when you do this, also add <strong>learnr2</strong> to the host’s Suggests (and to <code>Remotes</code> if it isn’t on CRAN), add <code>inst/tutorials/*/_extensions/</code> and <code>.quarto</code> to <code>.Rbuildignore</code> and <code>.gitignore</code>, and give the <code>.qmd</code> its own test, as shown in the previous section.</p>
+
+
+
+
+
+</body></html>

@@ -1,0 +1,72 @@
+learnr2 itself is released under the MIT license; see the LICENSE file.
+Copyright (c) 2026 learnr2 authors.
+
+The package bundles the following third-party components, all under
+inst/extdata/_extensions/r-wasm/live/. Each remains under its own license;
+that directory carries quarto-live's own LICENSE.md, and the top-level
+LICENSE.note file summarises the license of every component.
+
+----------------------------------------------------------------------------
+quarto-live 0.1.3-dev (the whole directory, except as noted below)
+  https://github.com/r-wasm/quarto-live
+  Copyright (c) 2024 quarto-live authors (George Stagg)
+  License: MIT
+
+resources/tinyyaml.lua
+  https://github.com/api7/lua-tinyyaml
+  Copyright (c) 2017 peposso
+  License: MIT (full text retained in the file header)
+
+resources/live-runtime.js and resources/pyodide-worker.js are minified
+bundles built by quarto-live from its own TypeScript sources
+(https://github.com/r-wasm/quarto-live/tree/main/live-runtime) together with
+these libraries:
+
+  CodeMirror 6 (codemirror, @codemirror/*, including @codemirror/lang-python)
+  and Lezer (@lezer/*, including @lezer/python)
+    https://codemirror.net/, https://lezer.codemirror.net/
+    Copyright (c) Marijn Haverbeke and others
+    License: MIT
+
+  codemirror-lang-r, lezer-r
+    https://github.com/TravisYeah/lang-r, https://github.com/TravisYeah/lezer-r
+    Copyright (c) Travis Harrison and others
+    License: MIT
+
+  Comlink
+    https://github.com/GoogleChromeLabs/comlink
+    Copyright 2019 Google LLC (as preserved in the bundles' @license header)
+    License: Apache-2.0
+
+  webR JavaScript client (the main-thread API only)
+    https://github.com/r-wasm/webr
+    Copyright (c) 2023 webR authors
+    License: MIT. webR's LICENCE.md puts its compiled binaries under GPL-3
+    and everything else under MIT "unless stated otherwise in the source
+    code files"; the client sources (src/webR/) carry no such statement.
+
+  ansi-to-html (renders R's coloured console output as HTML)
+    https://github.com/rburns/ansi-to-html
+    Copyright (c) 2012 Rob Burns
+    License: MIT
+
+  entities (HTML escaping, a dependency of ansi-to-html)
+    https://github.com/fb55/entities
+    Copyright (c) Felix Boehm
+    License: BSD-2-Clause
+
+  @jupyter-widgets/html-manager (Jupyter widgets HTML manager)
+    https://github.com/jupyter-widgets/ipywidgets
+    Copyright (c) 2015 Project Jupyter Contributors
+    License: BSD-3-Clause
+
+  Pyodide (JavaScript loader only)
+    https://github.com/pyodide/pyodide
+    Copyright (c) Pyodide contributors and Mozilla
+    License: MPL-2.0
+
+Not bundled, and downloaded by the rendered page in the reader's browser:
+the webR worker and R WebAssembly binaries (GPL-3, from webr.r-wasm.org),
+the Pyodide runtime (from cdn.jsdelivr.net), Plotly (from cdn.plot.ly, only
+when a Python cell produces a Plotly figure), and any R or Python packages a
+tutorial uses. No GPL-licensed code is included in this package.
